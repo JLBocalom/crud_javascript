@@ -3,9 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
     <title>Cadastro</title>
 </head>
 <body>
-    
+
+    <form>
+        <div class="container">
+          <h1>Cadastro</h1>
+          Id:<input id="id" name="id" disabled>
+          <hr>
+          <label for="nome"><b>Nome</b></label>
+          <input type="text" id="fnome" name="nome" placeholder="Seu nome" required>
+      
+          <label for="email"><b>Email</b></label>
+          <input type="text" placeholder="Digite seu Email" name="email" id="email" required>
+      
+          <label for="cidade"><b>Cidade</b></label>
+          <input type="text" placeholder="Digite a sua cidade" name="cidade" id="cidade" required>
+      
+          <label for="telefone"><b>Telefone</b></label>
+          <input type="text" placeholder="Digite seu telefone" name="telefone" id="telefone" required>
+          <hr>
+               
+          <button type="submit" onclick="formToJSON(event)" class="btnsalvar">Salvar</button>
+        </div>       
+      </form>
+      <br>
+      <div id="divtab"></div>
+      
+      <script src="js/dados.js"></script>
+      <script src="js/crud.js"></script>
+      <script>        
+          //Chamada para a função que gera a tabela
+          gerarTabelaUsuarios()
+          //Chamada a função para adicionar a coluna
+          adicionarColunaCRUD();
+      </script>
 </body>
 </html>

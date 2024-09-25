@@ -1,0 +1,87 @@
+
+/* CSS para o formulário */
+body {
+    font-family: Arial, Helvetica, sans-serif;    
+}
+
+* {
+    box-sizing: border-box;
+}
+  
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 4px 0;
+    font-size: 1.2em;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+label {
+    padding: 2px 2px 2px 0;
+    display: inline-block;
+}
+
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 5px;
+}
+
+.container {
+    padding: 16px;
+    background-color: white;
+}
+  
+
+.btnsalvar {
+    background-color: #04AA6D;
+    color: white;
+    font-size: 1.2em;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.btnsalvar:hover {
+    opacity: 1;
+}
+
+/* Farmatação da tabela*/
+#divtab {
+    padding: 16px;
+}
+table, th, td {
+    border: 1px solid #ddd;
+    border-collapse: collapse;
+    padding: 5px;
+    text-align: center;
+}
+
+#tab {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#tab th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: royalblue;
+    color: white;
+    text-align: center;
+  }
+
+#tab tr:nth-child(even){background-color: #f2f2f2;}
+
+#tab tr:hover {background-color: #ddd;}
