@@ -1,26 +1,26 @@
-// pegando os dados dos usuários
+//Pegando os dados dos usuários
 let usuarios = users;
-//Define o id de um novo usuario ao ser inserido na lista
+//Define o id de um novo usuário ao inserido na lista
 let novoid = usuarios.length + 1;
 
 //Gera HTML da tabela de usuários
-function gerarTabelaUsuarios() {
+function gerarTabelaUsuarios(){
 
     let tab = document.getElementById("tab");
-    //Se existir uma tabela antiga exclui  
+    //Se existir uma tabela antiga exclui
     if (tab){
         tab.remove();
     }
 
-    // criando a tabela
+    //Criando a tabela
     let tabela = document.createElement("table");
     tabela.setAttribute("id", "tab");
 
-    //criando o cabeçalho da tabela
+    //Criando o cabeçalho da tabela
     let cabecalho = tabela.createTHead();
     let linhaCabecalho = cabecalho.insertRow();
 
-    //pega o nome das chave do objeto json(colunas da tabela)
+    //Pega o nome das chaves do ojbjeto json (colunas da tabela)
     let chaves = Object.keys(usuarios[0]);
     let colunas = chaves;
     colunas.forEach(coluna => {
@@ -29,7 +29,7 @@ function gerarTabelaUsuarios() {
         linhaCabecalho.appendChild(th);
     });
 
-    // criando o corpo da tabela
+    //Criando o corpo da tabela
     let corpo = tabela.createTBody();
     usuarios.forEach(usuario => {
         let linha = corpo.insertRow();
@@ -42,8 +42,8 @@ function gerarTabelaUsuarios() {
     divtab.appendChild(tabela);
 }
 
-//Adiciona na tabela a coluna no CRUD
-function adicionarColunaCRUD() {
+//Adiciona na tabela a coluna do CRUD
+function adicionarColunaCRUD(){
     const btns = ["Editar", "Excluir"];
     let tabela = document.getElementById("tab");
     let thead = tabela.getElementsByTagName("thead")[0];
@@ -53,17 +53,17 @@ function adicionarColunaCRUD() {
     let novaCelulaCabecalho = document.createElement("th");
     novaCelulaCabecalho.textContent = "CRUD";
     thead.rows[0].appendChild(novaCelulaCabecalho);
-
-    //Cria os botões e as linhas da tabela
-    for (i = 0; i < tbody.rows.length; i++) {
+    
+    //Cria os botões e as linha da tabela
+    for (i = 0; i < tbody.rows.length; i++){
         let novaCelula = tbody.rows[i].insertCell(-1);
 
         btns.forEach(btn => {
             const botao = document.createElement("button");
-            if (btn == "Editar") {
+            if (btn == "Editar"){
                 botao.setAttribute("onclick", "editarLinha(this)")
             } else {
-                botao.setAttribute("onclick", "excluirUsuarios(this)")
+                botao.setAttribute("onclick", "excluirUsuario(this)")
             }
             botao.textContent = btn;
             novaCelula.appendChild(botao);
@@ -72,10 +72,10 @@ function adicionarColunaCRUD() {
 }
 
 //Limpa os inputs do form
-function limparFormulario() {
+function limparFormulario(){
     //Pega todos os inputs do form
     const inputs = document.querySelectorAll('input');
-
+    
     //itera pelo array de inputs limpando o campo
     inputs.forEach(input => {
         input.value = "";
@@ -83,14 +83,14 @@ function limparFormulario() {
 }
 
 //Captura o usuário da linha em que o botão foi clicado
-function editarLinha(button) {
+function editarLinha(button){
     //Pega a tr da linha do botão clicado
-    const linha = button.closest("tr");
+    const linha = button.closest('tr');
 
     //Pega todas as células da linha
-    const colunas = linha.getElementsByTagName("td");
+    const colunas = linha.getElementsByTagName('td');
 
-    //Cria um objeto json para transferir os dados do usuário]
+    //Cria um objeto json para transferir os dados do usuário
     const user = {
         id: colunas[0].textContent,
         nome: colunas[1].textContent,
@@ -102,56 +102,58 @@ function editarLinha(button) {
     console.log(user);
     jsonToForm(user);
 
-    //Posiciona a pagina com scroll mostrando o form 
+    //Posiciona a página com o scroll mostrando o form
     var section = document.querySelector(".container");
-    //Rola a tela lentamente para cima
-    section.scrollIntoView({behavior:'smooth'});
+    section.scrollIntoView({ behavior: 'smooth'});
+
 }
 
-//Atualizar a tabela e a coluna do CRUD
+//Atualiza a tabela e a coluna do CRUD
 function atualizaTabela(){
-    //Limpa os input do form 
+    //Limpa os inputs do form
     limparFormulario();
-    //Chama a função que gera a tabela novamente quado o array de usuarios é atualizado
+    //Chama a função que gera a tabela novamente quando o array de usuários é atualizado
     gerarTabelaUsuarios();
     //Chama a função que adiciona a coluna do CRUD
     adicionarColunaCRUD();
 }
 
-//Tranfere os dados da linha da tabela para o form
-function jsonToForm(user) {
-    for (const key in user) {
+//Transfere os dados da linha da tabela para o form
+function jsonToForm(user){
+    for(const key in user){
         const input = document.querySelector(`[name="${key}"]`);
-        if (input) {
+        if (input){
             input.value = user[key];
         }
     }
 }
 
 //Transfere os dados do formulário para um user json
-//Transfere o user para o array de usuários
-//Atualiza os dados da Tabela
+//transfere o user para o array de usuários
+//Atualiza os dados da tabela
 function formToJSON(event){
+    //Não deixa executar o submit do form
     event.preventDefault();
 
-    let user = {id: "", nome: "", email: "", cidade: "", telefone: ""}
+    let user = {id: "", nome: "", email: "", cidade: "", telefone: ""};
 
-    //Seleciona todos os inputs do form
+    //Seleciona todos os inputs do form 
     const inputs = document.querySelectorAll('input');
 
-    //Pega os valores dos inputs e transfere para o ojeto Json user
+    //Pega os valores dos inputs e transfere para o objeto json user
     inputs.forEach(input => {
         user[input.name] = input.value;
     });
-    
-    if(user.id != ""){
-        let index = usuarios.findIndex(usuario => usuario.id === user.id)
 
-        if(index !== -1){
+    if (user.id != ""){
+
+        let index = usuarios.findIndex(usuario => usuario.id === user.id);
+
+        if (index !== -1){
             usuarios[index] = user;
         }
-    }else{
-        inserirUsuario
+    } else {
+        inserirUsuario(user);
     }
 
     console.log(user);
@@ -167,24 +169,24 @@ function inserirUsuario(user){
     usuarios.push(user);
 }
 
-//Exclui o usuario da linha em que o button for clicado na tabela 
-function excluirUsuarios(button){
+//Uxclui o usuario da linha em que o botão foi clicado na tabela
+function excluirUsuario(button){
     //Pega a linha em que o botão foi clicado
     const linha = button.closest('tr');
-    //Pega todas as colunas da linha 
+    //Pega todas colunas da linha
     const colunas = linha.getElementsByTagName('td');
-    //Pega o id do Usuario
+    //Pega o id do usuário
     const userId = colunas[0].textContent;
-    //Percorre o array de usuarios para encontrar o usuario pelo ID
+    //Percorre o array de usuarios para encontrar o usuário pelo id
     const index = usuarios.findIndex(user => user.id === userId);
     console.log("Excluindo: " + index);
-    
-    if(index !== -1){
+
+    if (index !== -1){
         usuarios.splice(index, 1);
         atualizaTabela();
         console.log(`Usuário com id ${userId} excluído com sucesso.`)
-    }
-    else{
+    } else {
         console.log(`Usuário com id ${userId} não encontrado.`)
     }
+    
 }
